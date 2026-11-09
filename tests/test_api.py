@@ -142,7 +142,7 @@ def test_api_hud(client):
     assert 'reliquary_items' in data
     assert 'oracle' in data
     assert data['user']['username'] == "PlayerOne"
-    assert len(data['campaigns']) == 2
+    assert len(data['campaigns']) >= 2
     assert len(data['quests']) >= 6
 
 def test_api_campaign_creation(client):

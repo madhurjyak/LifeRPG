@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, jsonify, request, g
 from datetime import datetime, date, timedelta
-from app.database import get_db
+from app.database import get_db, seed_initial_data
 from app.services.game_engine import (
     calculate_level_info,
     calculate_sub_level_info,
@@ -17,20 +17,26 @@ def get_current_user_id():
     user = db.execute("SELECT id FROM users ORDER BY id ASC LIMIT 1").fetchone()
     if user:
         return user['id']
-    # If no user exists, create default PlayerOne
-    db.execute("""
-        INSERT INTO users (username, total_xp, level, ascension_phase, archetype_title, aether_gold, current_streak)
-        VALUES ('PlayerOne', 0, 1, 1, 'Novice Seeker', 100, 0)
-    """)
-    db.commit()
-    new_user = db.execute("SELECT id FROM users WHERE username = 'PlayerOne'").fetchone()
-    return new_user['id']
+    # If no user exists, run full rich sample data seeding
+    return seed_initial_data(db, force=True)
 
 @main_bp.route('/')
 @main_bp.route('/api')
 @main_bp.route('/api/')
 def dashboard():
     return render_template('dashboard.html')
+
+@main_bp.route('/api/demo/seed', methods=['POST'])
+def seed_demo_realm():
+    db = get_db()
+    data = request.get_json(silent=True) or {}
+    force = bool(data.get('force', True))
+    user_id = seed_initial_data(db, force=force)
+    return jsonify({
+        "success": True,
+        "message": "Sanctuary replenished with rich sample cultivation data!",
+        "user_id": user_id
+    })
 
 @main_bp.route('/api/hud', methods=['GET'])
 def get_hud():

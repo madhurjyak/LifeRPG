@@ -63,21 +63,37 @@ def init_db(db_path=None, seed=True):
         seed_initial_data(conn)
     conn.close()
 
-def seed_initial_data(conn):
+def seed_initial_data(conn, force=False):
     cursor = conn.cursor()
     
     # Check if demo user already exists
     cursor.execute("SELECT id FROM users WHERE username = ?", ("PlayerOne",))
     existing_user = cursor.fetchone()
-    if existing_user:
-        cursor.close()
-        return
+    
+    if existing_user and not force:
+        user_id = existing_user[0] if isinstance(existing_user, tuple) else existing_user["id"]
+        # If user already has active campaigns, keep existing state
+        cursor.execute("SELECT count(*) FROM campaigns WHERE user_id = ?", (user_id,))
+        count = cursor.fetchone()[0]
+        if count > 0:
+            cursor.close()
+            return user_id
+
+    if existing_user and force:
+        user_id = existing_user[0] if isinstance(existing_user, tuple) else existing_user["id"]
+        cursor.execute("DELETE FROM daily_quests WHERE user_id = ?", (user_id,))
+        cursor.execute("DELETE FROM campaigns WHERE user_id = ?", (user_id,))
+        cursor.execute("DELETE FROM adventure_logs WHERE user_id = ?", (user_id,))
+        cursor.execute("DELETE FROM reliquary_items WHERE user_id = ?", (user_id,))
+        cursor.execute("DELETE FROM focus_sessions WHERE user_id = ?", (user_id,))
+        cursor.execute("DELETE FROM users WHERE id = ?", (user_id,))
+        existing_user = None
 
     today = datetime.now().date()
     yesterday = today - timedelta(days=1)
     
     # 1. Insert Demo User "PlayerOne"
-    # Starting stats: Level 6, Phase 2, Balanced XP
+    # Starting stats: Level 8, Phase 2, Balanced XP across all 4 pillars
     cursor.execute("""
         INSERT INTO users (
             username, total_xp, level, ascension_phase, archetype_title,
@@ -87,24 +103,24 @@ def seed_initial_data(conn):
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         "PlayerOne",
-        1600,
-        6,
+        2850,
+        8,
         2,
         "Grand Architect",
-        420,
-        380,
-        450,
-        350,
-        175,
-        5,
+        850,
+        720,
+        880,
+        400,
+        340,
         7,
+        14,
         2,
-        125,
+        275,
         yesterday.isoformat()
     ))
     user_id = cursor.lastrowid
 
-    # 2. Insert 2 Active Campaigns
+    # 2. Insert 4 Active Campaigns (One for each Core Pillar)
     campaign1_target = (today + timedelta(days=30)).isoformat()
     cursor.execute("""
         INSERT INTO campaigns (
@@ -115,12 +131,12 @@ def seed_initial_data(conn):
     """, (
         user_id,
         "Master the Neural Citadel (AI System Architect)",
-        "Design and deploy production-grade distributed intelligence engines.",
+        "Design, benchmark, and deploy production-grade distributed intelligence engines.",
         "Technical mastery, architectural resilience, high cognitive output.",
         "Entropy, Void of Fragmented Logic",
         "Primordial Lord of Technical Debt",
-        600,
-        320,
+        800,
+        340,
         campaign1_target,
         "active"
     ))
@@ -135,50 +151,131 @@ def seed_initial_data(conn):
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         user_id,
-        "Iron Will: The Titan Conditioning",
-        "Forge neuromuscular strength, metabolic flexibility, and physical endurance.",
+        "Titan Physique & Metabolic Transmutation",
+        "Forge neuromuscular strength, 3x weekly compound lifts, and metabolic flexibility.",
         "Daily physical conditioning, zone 2 cardio, clean nutrition.",
         "Acedia, The Sloth Colossus",
-        "Warden of Stagnation",
-        500,
-        410,
+        "Warden of Physical Stagnation",
+        650,
+        260,
         campaign2_target,
         "active"
     ))
     campaign2_id = cursor.lastrowid
 
-    # 3. Insert 6 Daily Quests for Today
+    campaign3_target = (today + timedelta(days=60)).isoformat()
+    cursor.execute("""
+        INSERT INTO campaigns (
+            user_id, title, description, ai_context,
+            boss_name, boss_title, boss_max_hp, boss_current_hp,
+            target_date, status
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (
+        user_id,
+        "Ascend to Principal Staff Engineer",
+        "Author foundational RFCs, align cross-functional domains, and guide engineering adepts.",
+        "Strategic engineering leadership, architectural clarity, mentorship.",
+        "Impostor Phantom, Lord of Self-Doubt",
+        "Specter of the Hall of Echoes",
+        700,
+        480,
+        campaign3_target,
+        "active"
+    ))
+    campaign3_id = cursor.lastrowid
+
+    campaign4_target = (today + timedelta(days=90)).isoformat()
+    cursor.execute("""
+        INSERT INTO campaigns (
+            user_id, title, description, ai_context,
+            boss_name, boss_title, boss_max_hp, boss_current_hp,
+            target_date, status
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (
+        user_id,
+        "The Sovereign Treasury (Asset Freedom)",
+        "Automate disciplined investment contributions, minimize drag, and secure runway.",
+        "Financial sovereignty, disciplined capital allocation, wealth multiplication.",
+        "Mammon's Mirage, Drake of Hollow Consumption",
+        "Tempter of Impulsive Expenditures",
+        500,
+        190,
+        campaign4_target,
+        "active"
+    ))
+    campaign4_id = cursor.lastrowid
+
+    # 3. Insert Daily Quests:
+    # A mix of active deeds ready for interaction + today's completed + historical
     today_str = today.isoformat()
     sample_quests = [
+        # Incomplete Deeds for Today (ready to click and experience gameplay mechanics)
         (
             campaign1_id, user_id,
-            "Design Deep Residual Neural Architecture Diagram",
+            "Design Vector Index Partitioning Architecture",
             "MIND", "A", 150, 65, 150, 0, today_str, None
         ),
         (
             campaign2_id, user_id,
-            "Deadlift 3x5 at 80% 1RM & Mobility Sequence",
+            "Heavy Barbell Squats 4x6 & Hip Mobility Flow",
             "HEALTH", "B", 100, 40, 100, 0, today_str, None
         ),
         (
-            campaign1_id, user_id,
-            "Refactor Blueprint Routing Architecture",
-            "CAREER", "C", 65, 25, 65, 0, today_str, None
+            campaign3_id, user_id,
+            "Author Architecture Decision Record (ADR) for Event Stream",
+            "CAREER", "B", 100, 40, 100, 0, today_str, None
         ),
         (
-            None, user_id,
-            "Audit Index Fund Allocation & Rebalance Portfolio",
+            campaign4_id, user_id,
+            "Review Monthly Investment Contributions & Rebalance Index Funds",
             "WEALTH", "C", 65, 25, 65, 0, today_str, None
         ),
         (
             campaign1_id, user_id,
-            "Execute 50-minute Crucible Deep Focus Module",
-            "MIND", "B", 100, 40, 100, 0, today_str, None
+            "Deploy Microservice Cluster with Zero-Downtime Migration",
+            "MIND", "S", 250, 100, 250, 0, today_str, None
         ),
         (
             campaign2_id, user_id,
-            "Cold Shower Protocol & 10-Minute Box Breathing",
-            "HEALTH", "D", 40, 15, 40, 1, today_str, datetime.now().isoformat()
+            "10-Minute Box Breathing & Cold Hydrotherapy Protocol",
+            "HEALTH", "D", 40, 15, 40, 0, today_str, None
+        ),
+        (
+            campaign3_id, user_id,
+            "Lead High-Leverage Strategic Architecture Sync with Senior Adepts",
+            "CAREER", "A", 150, 65, 150, 0, today_str, None
+        ),
+        # Completed Today
+        (
+            campaign3_id, user_id,
+            "Code Review 3 Pull Requests with Architectural Mentorship",
+            "CAREER", "C", 65, 25, 65, 1, today_str, (datetime.now() - timedelta(hours=3)).isoformat()
+        ),
+        (
+            campaign1_id, user_id,
+            "Deep Work Meditation: 50-Minute Crucible Focus Module",
+            "MIND", "B", 100, 40, 100, 1, today_str, (datetime.now() - timedelta(hours=5)).isoformat()
+        ),
+        (
+            campaign2_id, user_id,
+            "Morning Mobility Sequence & 2L Electrolyte Hydration",
+            "HEALTH", "E", 25, 10, 25, 1, today_str, (datetime.now() - timedelta(hours=6)).isoformat()
+        ),
+        # Completed Yesterday (maintains streak)
+        (
+            campaign2_id, user_id,
+            "Deadlift 3x5 at 80% 1RM & Mobility Sequence",
+            "HEALTH", "B", 100, 40, 100, 1, yesterday.isoformat(), yesterday.strftime("%Y-%m-%d 18:30:00")
+        ),
+        (
+            campaign1_id, user_id,
+            "Refactor Blueprint Routing Architecture",
+            "MIND", "C", 65, 25, 65, 1, yesterday.isoformat(), yesterday.strftime("%Y-%m-%d 14:15:00")
+        ),
+        (
+            campaign4_id, user_id,
+            "Audit Index Fund Allocation & Tax-Loss Harvesting",
+            "WEALTH", "C", 65, 25, 65, 1, yesterday.isoformat(), yesterday.strftime("%Y-%m-%d 11:00:00")
         ),
     ]
 
@@ -190,7 +287,7 @@ def seed_initial_data(conn):
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, q)
 
-    # 4. Insert 7 Historical Journal Logs (Days -6 to Today)
+    # 4. Insert 8 Historical Journal Logs (Days -7 to Today)
     historical_logs = [
         (
             user_id,
@@ -200,7 +297,7 @@ def seed_initial_data(conn):
             "#deepwork,#architecture,#flowstate",
             "Context switching during afternoon standups",
             50,
-            (today - timedelta(days=6)).strftime("%Y-%m-%d 20:15:00")
+            (today - timedelta(days=7)).strftime("%Y-%m-%d 20:15:00")
         ),
         (
             user_id,
@@ -210,17 +307,17 @@ def seed_initial_data(conn):
             "#fitness,#conditioning,#discipline",
             "Late night screen exposure",
             50,
-            (today - timedelta(days=5)).strftime("%Y-%m-%d 21:30:00")
+            (today - timedelta(days=6)).strftime("%Y-%m-%d 21:30:00")
         ),
         (
             user_id,
             "Felt mental friction today. Procrastinated on data schema migration due to ambiguous requirements. Eventually rallied for a 25min focus session.",
             "Ambiguity is the shroud worn by Entropy. Slice through fog with granular micro-vows. A single clean strike dissolves hesitation.",
-            -15,
+            -20,
             "#friction,#procrastination,#schema",
             "Ambiguous technical requirements",
             50,
-            (today - timedelta(days=4)).strftime("%Y-%m-%d 22:05:00")
+            (today - timedelta(days=5)).strftime("%Y-%m-%d 22:05:00")
         ),
         (
             user_id,
@@ -230,33 +327,43 @@ def seed_initial_data(conn):
             "#breakthrough,#clean_code,#state_machine",
             "None",
             50,
-            (today - timedelta(days=3)).strftime("%Y-%m-%d 19:45:00")
+            (today - timedelta(days=4)).strftime("%Y-%m-%d 19:45:00")
         ),
         (
             user_id,
-            "Managed personal finances, paid tax reserves, and completed morning mobility drills. Steady and measured progress.",
+            "Managed personal finances, paid tax reserves, and completed morning mobility drills. Steady and measured progress across the sovereign treasury.",
             "Order across all pillars is the mark of true sovereignty. Gold flows where discipline reigns supreme.",
-            60,
+            68,
             "#wealth,#mobility,#order",
             "Minor fatigue from week buildup",
             50,
-            (today - timedelta(days=2)).strftime("%Y-%m-%d 20:50:00")
+            (today - timedelta(days=3)).strftime("%Y-%m-%d 20:50:00")
         ),
         (
             user_id,
             "Deep focus dungeon: executed two 50-minute Crucible sessions back-to-back. The neural pipeline test suite passed with 100% coverage.",
             "You have entered the transcendent flow. The Citadel rises stone by stone beneath your disciplined hands.",
-            82,
+            85,
             "#crucible,#deepwork,#unit_tests",
             "None",
             50,
-            yesterday.strftime("%Y-%m-%d 21:10:00")
+            (today - timedelta(days=2)).strftime("%Y-%m-%d 21:10:00")
         ),
         (
             user_id,
-            "Dawn session began with clarity. Logged morning cold protocol and prepared daily quests. Ready to confront the Campaign Boss.",
-            "The morning sun illuminates your path of Ascension. Maintain the sacred streak and let no distraction breach your perimeter.",
+            "Heavy squat session completed and drafted ADR for event streaming pipeline. The tribulation bosses are steadily taking damage.",
+            "The twin pillars of somatic power and mental clarity ascend in harmony. Victory draws nigh.",
             75,
+            "#conditioning,#architecture,#momentum",
+            "None",
+            50,
+            yesterday.strftime("%Y-%m-%d 20:30:00")
+        ),
+        (
+            user_id,
+            "Dawn session began with clarity. Logged morning cold protocol and prepared daily vows across Mind and Physique. Ready to strike the Campaign Boss.",
+            "The morning sun illuminates your path of Ascension. Maintain the sacred streak and let no distraction breach your perimeter.",
+            78,
             "#morning_routine,#readiness,#ascension",
             "None",
             50,
@@ -272,7 +379,7 @@ def seed_initial_data(conn):
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """, log)
 
-    # 5. Insert 5 Reliquary Items
+    # 5. Insert 8 Reliquary Items
     items = [
         (
             user_id,
@@ -281,6 +388,15 @@ def seed_initial_data(conn):
             "SYSTEM_ARTIFACT",
             120,
             "shield",
+            2
+        ),
+        (
+            user_id,
+            "Aether Elixir (Focus Incense & Tea)",
+            "A ceremonial blend of high-mountain oolong and grounding agarwood incense for deep seclusion sessions.",
+            "IRL_REWARD",
+            60,
+            "flame",
             1
         ),
         (
@@ -290,7 +406,7 @@ def seed_initial_data(conn):
             "IRL_REWARD",
             45,
             "coffee",
-            3
+            4
         ),
         (
             user_id,
@@ -308,7 +424,7 @@ def seed_initial_data(conn):
             "IRL_REWARD",
             250,
             "sparkles",
-            0
+            1
         ),
         (
             user_id,
@@ -318,6 +434,24 @@ def seed_initial_data(conn):
             180,
             "book-open",
             1
+        ),
+        (
+            user_id,
+            "Arcane Keycaps (Custom Mechanical Artisan Cap)",
+            "An anodized aluminum artisan keycap embodying arcane mastery on your primary keyboard.",
+            "IRL_REWARD",
+            300,
+            "cpu",
+            0
+        ),
+        (
+            user_id,
+            "Celestial Feast (Chef's Tasting Celebration)",
+            "Celebrate slaying a Tier IV Boss with a celebratory multi-course dinner with companions.",
+            "IRL_REWARD",
+            500,
+            "utensils",
+            0
         ),
     ]
 
@@ -329,11 +463,17 @@ def seed_initial_data(conn):
             ) VALUES (?, ?, ?, ?, ?, ?, ?)
         """, it)
 
-    # 6. Insert initial focus sessions for historical velocity chart
+    # 6. Insert Historical Focus Sessions across the past 12 days
     focus_history = [
-        (user_id, campaign1_id, "MIND", 50, 160, 180, (today - timedelta(days=6)).strftime("%Y-%m-%d 10:00:00")),
-        (user_id, campaign2_id, "HEALTH", 25, 70, 80, (today - timedelta(days=4)).strftime("%Y-%m-%d 16:30:00")),
+        (user_id, campaign1_id, "MIND", 50, 160, 180, (today - timedelta(days=12)).strftime("%Y-%m-%d 10:00:00")),
+        (user_id, campaign2_id, "HEALTH", 25, 70, 80, (today - timedelta(days=10)).strftime("%Y-%m-%d 16:30:00")),
+        (user_id, campaign3_id, "CAREER", 50, 160, 180, (today - timedelta(days=8)).strftime("%Y-%m-%d 11:15:00")),
+        (user_id, campaign1_id, "MIND", 50, 160, 180, (today - timedelta(days=6)).strftime("%Y-%m-%d 09:45:00")),
+        (user_id, campaign2_id, "HEALTH", 25, 70, 80, (today - timedelta(days=5)).strftime("%Y-%m-%d 17:00:00")),
+        (user_id, campaign1_id, "MIND", 90, 280, 320, (today - timedelta(days=3)).strftime("%Y-%m-%d 14:00:00")),
+        (user_id, campaign3_id, "CAREER", 50, 160, 180, (today - timedelta(days=2)).strftime("%Y-%m-%d 10:30:00")),
         (user_id, campaign1_id, "MIND", 50, 160, 180, yesterday.strftime("%Y-%m-%d 14:00:00")),
+        (user_id, campaign1_id, "MIND", 50, 160, 180, today.strftime("%Y-%m-%d 09:30:00")),
     ]
     for fs in focus_history:
         cursor.execute("""
@@ -345,3 +485,4 @@ def seed_initial_data(conn):
 
     conn.commit()
     cursor.close()
+    return user_id

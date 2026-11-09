@@ -270,6 +270,34 @@ function lifeRpgApp() {
             this.showToast("Meditation Chimes", this.soundMuted ? "Temple Bell Silenced" : "Temple Bell Harmonized", "info");
         },
 
+        async seedSampleData() {
+            if (!confirm("Populate Sanctuary with rich sample cultivation data (4 Pillar Campaigns, Deeds, Grimoire logs, and Relics)?")) {
+                return;
+            }
+            this.loading = true;
+            try {
+                const res = await fetch('/api/demo/seed', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ force: true })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    soundSynth.playGong();
+                    this.triggerConfetti(true);
+                    await this.fetchHud();
+                    this.showToast("Sanctuary Replenished", "Rich cultivation data loaded across all 4 pillars!", "success");
+                } else {
+                    this.showToast("Seed Failed", data.error || "Could not populate data", "warning");
+                }
+            } catch (err) {
+                console.error("Seed error:", err);
+                this.showToast("Connection Error", "Failed to contact sanctuary server", "error");
+            } finally {
+                this.loading = false;
+            }
+        },
+
         showToast(title, message, type = 'success') {
             const id = Date.now() + Math.random();
             this.toasts.push({ id, title, message, type });
