@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Seven-Phase Ascension — Cultivation Sanctuary</title>
+
+    <!-- Tailwind CSS with Typography & Classical Wuxia Theme -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        parchment: '#fbf9f5',
+                        paper: '#f5f2eb',
+                        silk: '#faf8f5',
+                        ink: {
+                            deep: '#1c1917',
+                            stone: '#292524',
+                            wash: '#57534e',
+                            faint: '#a8a29e'
+                        },
+                        jade: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a'
+                        },
+                        cinnabar: {
+                            50: '#fef2f2',
+                            100: '#fee2e2',
+                            600: '#dc2626',
+                            700: '#b91c1c',
+                            800: '#991b1b',
+                            900: '#7f1d1d'
+                        },
+                        sandalwood: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f'
+                        },
+                        bamboo: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Cormorant Garamond', 'Cinzel', 'Noto Serif SC', 'Georgia', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        title: ['Cinzel', 'Cormorant Garamond', 'serif']
+                    },
+                    boxShadow: {
+                        'paper': '0 2px 10px -2px rgba(41, 37, 36, 0.05), 0 1px 3px -1px rgba(41, 37, 36, 0.03)',
+                        'seal': '0 0 0 1px rgba(185, 28, 28, 0.2), 0 2px 8px -2px rgba(185, 28, 28, 0.15)',
+                        'jade': '0 0 0 1px rgba(15, 118, 110, 0.2), 0 2px 8px -2px rgba(15, 118, 110, 0.15)'
+                    },
+                    animation: {
+                        'breathe': 'zenBreathe 6s infinite ease-in-out',
+                        'shake-soft': 'shakeSoft 0.4s ease-in-out',
+                    },
+                    keyframes: {
+                        zenBreathe: {
+                            '0%, 100%': { transform: 'scale(1)', opacity: '0.85' },
+                            '50%': { transform: 'scale(1.025)', opacity: '1' }
+                        },
+                        shakeSoft: {
+                            '10%, 90%': { transform: 'translate3d(-1px, 0, 0)' },
+                            '20%, 80%': { transform: 'translate3d(2px, 0, 0)' },
+                            '30%, 50%, 70%': { transform: 'translate3d(-3px, 0, 0)' },
+                            '40%, 60%': { transform: 'translate3d(3px, 0, 0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts for Classical Wuxia Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CDN Libraries -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.7/dist/cdn.min.js"></script>
+
+    <!-- Application Controller -->
+    <script src="/static/js/app.js"></script>
+
+    <style>
+        [x-cloak] { display: none !important; }
+        body {
+            background-color: #faf8f5;
+            background-image: radial-gradient(#e7e5e4 0.75px, transparent 0.75px);
+            background-size: 24px 24px;
+        }
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: #f5f2eb; }
+        ::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a8a29e; }
+        .paper-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(231, 229, 228, 0.85);
+            box-shadow: 0 1px 3px 0 rgba(41, 37, 36, 0.03), 0 1px 2px -1px rgba(41, 37, 36, 0.02);
+        }
+        .chinese-seal {
+            border: 1.5px solid #b91c1c;
+            color: #b91c1c;
+            background: rgba(254, 242, 242, 0.7);
+            font-family: 'Cinzel', 'Noto Serif SC', serif;
+            letter-spacing: 0.05em;
+        }
+        .jade-pill {
+            border: 1px solid rgba(15, 118, 110, 0.25);
+            color: #0f766e;
+            background: rgba(240, 253, 250, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-parchment text-ink-deep min-h-screen selection:bg-jade-100 font-sans" x-data="lifeRpgApp()" x-cloak>
+
+    <!-- CALM TOAST NOTIFICATIONS CONTAINER -->
+    <div class="fixed top-5 right-5 z-50 flex flex-col gap-2.5 pointer-events-none max-w-sm w-full">
+        <template x-for="t in toasts" :key="t.id">
+            <div class="pointer-events-auto p-4 rounded-xl border paper-card shadow-lg transition-all duration-300 flex items-start gap-3"
+                 :class="{
+                    'border-jade-600/30 text-jade-900 bg-jade-50/90': t.type === 'success',
+                    'border-cinnabar-600/30 text-cinnabar-900 bg-cinnabar-50/90': t.type === 'error',
+                    'border-stone-300 text-stone-800 bg-white/95': t.type === 'info'
+                 }">
+                <i data-lucide="feather" class="w-4 h-4 flex-shrink-0 mt-0.5 text-jade-700" x-show="t.type === 'success'"></i>
+                <i data-lucide="alert-circle" class="w-4 h-4 flex-shrink-0 mt-0.5 text-cinnabar-700" x-show="t.type === 'error'"></i>
+                <i data-lucide="bell" class="w-4 h-4 flex-shrink-0 mt-0.5 text-stone-600" x-show="t.type === 'info'"></i>
+                <div>
+                    <h4 class="font-title font-semibold text-xs tracking-wider uppercase text-stone-900" x-text="t.title"></h4>
+                    <p class="text-xs text-stone-600 mt-0.5 font-serif leading-relaxed" x-text="t.message"></p>
+                </div>
+            </div>
+        </template>
+    </div>
+
+    <!-- ==================================================================== -->
+    <!-- STICKY TOP ASCENSION HUD (CALM WUXIA JADE & INK)                      -->
+    <!-- ==================================================================== -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-stone-200/90 shadow-sm px-4 py-3">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-4">
+            
+            <!-- Left: Cultivator Identity & Realm Seal -->
+            <div class="flex items-center gap-3.5 w-full lg:w-auto">
+                <div class="relative group">
+                    <!-- Medallion Seal Avatar -->
+                    <div class="w-12 h-12 rounded-xl bg-stone-50 border-2 border-stone-300/80 flex items-center justify-center font-serif font-bold text-lg text-stone-800 shadow-sm">
+                        <span x-text="user.username ? user.username.substring(0, 2).toUpperCase() : '道'"></span>
+                    </div>
+                    <div class="absolute -bottom-1 -right-1 bg-jade-700 text-white font-serif font-bold text-[10px] px-1.5 py-0.2 rounded-md shadow-sm" x-text="'L' + (levelInfo.level || 1)"></div>
+                </div>
+
+                <div>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <h1 class="font-title font-bold text-base text-stone-900 tracking-wider flex items-center gap-1.5">
+                            <span x-text="user.username || 'Cultivator'"></span>
+                        </h1>
+                        <!-- Cinnabar Red Seal Badge for Realm Phase -->
+                        <span class="px-2.5 py-0.5 rounded text-[11px] font-title font-bold tracking-wide chinese-seal"
+                              x-text="levelInfo.ascension_title || 'Phase I: The Dormant Initiate'">
+                        </span>
+                    </div>
+                    <div class="flex items-center gap-2 mt-0.5 font-serif text-xs">
+                        <span class="text-stone-700 font-semibold flex items-center gap-1">
+                            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-sandalwood-700"></i>
+                            <span x-text="user.archetype_title || 'Novice Seeker'"></span>
+                        </span>
+                        <span class="text-stone-300">•</span>
+                        <span class="text-stone-500 font-mono text-[11px]" x-text="(user.total_xp || 0).toLocaleString() + ' Cultivated Qi'"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle: Main Cultivation Progress & 4 Pillars Mini-Gauges -->
+            <div class="flex flex-col gap-1.5 w-full lg:max-w-xl">
+                <!-- Main Level Progress Bar -->
+                <div class="flex items-center justify-between text-xs font-serif text-stone-600">
+                    <span class="flex items-center gap-1">
+                        Cultivation Realm Level <strong class="text-jade-800 font-bold" x-text="levelInfo.level || 1"></strong>
+                    </span>
+                    <span class="font-mono text-[11px] text-stone-500" x-text="(levelInfo.current_level_xp || 0) + ' / ' + (levelInfo.next_level_xp - levelInfo.base_xp || 100) + ' Qi (' + (levelInfo.level_progress_pct || 0) + '%)'"></span>
+                </div>
+                <div class="h-2 w-full bg-stone-100 rounded-full overflow-hidden border border-stone-200 relative">
+                    <div class="h-full bg-gradient-to-r from-jade-700 to-teal-500 rounded-full transition-all duration-500"
+                         :style="`width: ${levelInfo.level_progress_pct || 0}%`"></div>
+                </div>
+
+                <!-- 4 Attribute Pillar Mini-Bars (Mind, Health, Career, Wealth) -->
+                <div class="grid grid-cols-4 gap-2 pt-1 font-serif">
+                    <!-- SPIRIT (MIND) -->
+                    <div class="flex flex-col gap-0.5">
+                        <div class="flex justify-between text-[10px] text-teal-800 font-medium">
+                            <span>SPIRIT <span class="text-stone-400 font-mono" x-text="'L' + (pillarInfo.MIND?.sub_level || 1)"></span></span>
+                            <span class="font-mono" x-text="(pillarInfo.MIND?.progress_pct || 0) + '%'"></span>
+                        </div>
+                        <div class="h-1 bg-stone-100 rounded-full overflow-hidden border border-teal-200">
+                            <div class="h-full bg-teal-600 rounded-full" :style="`width: ${pillarInfo.MIND?.progress_pct || 0}%`"></div>
+                        </div>
+                    </div>
+
+                    <!-- PHYSIQUE (HEALTH) -->
+                    <div class="flex flex-col gap-0.5">
+                        <div class="flex justify-between text-[10px] text-bamboo-800 font-medium">
+                            <span>BODY <span class="text-stone-400 font-mono" x-text="'L' + (pillarInfo.HEALTH?.sub_level || 1)"></span></span>
+                            <span class="font-mono" x-text="(pillarInfo.HEALTH?.progress_pct || 0) + '%'"></span>
+                        </div>
+                        <div class="h-1 bg-stone-100 rounded-full overflow-hidden border border-bamboo-200">
+                            <div class="h-full bg-bamboo-700 rounded-full" :style="`width: ${pillarInfo.HEALTH?.progress_pct || 0}%`"></div>
+                        </div>
+                    </div>
+
+                    <!-- DAO MASTERY (CAREER) -->
+                    <div class="flex flex-col gap-0.5">
+                        <div class="flex justify-between text-[10px] text-indigo-800 font-medium">
+                            <span>DAO <span class="text-stone-400 font-mono" x-text="'L' + (pillarInfo.CAREER?.sub_level || 1)"></span></span>
+                            <span class="font-mono" x-text="(pillarInfo.CAREER?.progress_pct || 0) + '%'"></span>
+                        </div>
+                        <div class="h-1 bg-stone-100 rounded-full overflow-hidden border border-indigo-200">
+                            <div class="h-full bg-indigo-600 rounded-full" :style="`width: ${pillarInfo.CAREER?.progress_pct || 0}%`"></div>
+                        </div>
+                    </div>
+
+                    <!-- FORTUNE (WEALTH) -->
+                    <div class="flex flex-col gap-0.5">
+                        <div class="flex justify-between text-[10px] text-sandalwood-800 font-medium">
+                            <span>FORTUNE <span class="text-stone-400 font-mono" x-text="'L' + (pillarInfo.WEALTH?.sub_level || 1)"></span></span>
+                            <span class="font-mono" x-text="(pillarInfo.WEALTH?.progress_pct || 0) + '%'"></span>
+                        </div>
+                        <div class="h-1 bg-stone-100 rounded-full overflow-hidden border border-sandalwood-200">
+                            <div class="h-full bg-sandalwood-700 rounded-full" :style="`width: ${pillarInfo.WEALTH?.progress_pct || 0}%`"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Stats Badges (Streak, Shields, Gold, Audio Toggle) -->
+            <div class="flex items-center gap-2.5 w-full lg:w-auto justify-between lg:justify-end">
+                <!-- Unbroken Momentum / Streak Flame -->
+                <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-stone-50 border border-stone-200 text-stone-800 text-xs font-serif" title="Consecutive Days of Cultivation">
+                    <i data-lucide="flame" class="w-3.5 h-3.5 text-sandalwood-700"></i>
+                    <span class="font-mono font-bold" x-text="user.current_streak || 0"></span>
+                    <span class="text-[10px] text-stone-500 font-mono" x-text="'(x' + streakMultiplier + ')'"></span>
+                </div>
+
+                <!-- Chronos Aegis / Temporal Talisman -->
+                <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-teal-50/80 border border-teal-200 text-teal-800 text-xs font-serif" title="Preservation Talismans">
+                    <i data-lucide="shield" class="w-3.5 h-3.5 text-teal-700"></i>
+                    <span class="font-mono font-bold" x-text="user.streak_shields || 0"></span>
+                </div>
+
+                <!-- Spirit Stones / Aether Gold -->
+                <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-50/80 border border-amber-200 text-amber-900 text-xs font-serif" title="Spirit Stones">
+                    <i data-lucide="circle-dot" class="w-3.5 h-3.5 text-amber-700"></i>
+                    <span class="font-mono font-bold" x-text="(user.aether_gold || 0).toLocaleString()"></span>
+                </div>
+
+                <!-- Temple Bell / Sound Toggle -->
+                <button @click="toggleAudio()" class="p-2 rounded-lg border border-stone-200 bg-stone-50 text-stone-600 hover:text-stone-900 hover:bg-white transition" title="Toggle Meditation Chimes">
+                    <i data-lucide="volume-2" class="w-4 h-4 text-stone-700" x-show="!soundMuted"></i>
+                    <i data-lucide="volume-x" class="w-4 h-4 text-stone-400" x-show="soundMuted"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================================================================== -->
+    <!-- WUXIA NAVIGATION BAR / CULTIVATION PAVILIONS                          -->
+    <!-- ==================================================================== -->
+    <nav class="max-w-7xl mx-auto px-4 mt-6">
+        <div class="flex items-center justify-between border-b border-stone-200 pb-3 gap-2 overflow-x-auto">
+            <div class="flex items-center gap-1.5">
+                <!-- Tab 1: Sanctuary -->
+                <button @click="activeTab = 'command'"
+                        class="px-4 py-2 rounded-xl text-xs sm:text-sm font-title tracking-wider transition flex items-center gap-2 border"
+                        :class="activeTab === 'command' ? 'bg-stone-900 text-white border-stone-900 shadow-sm' : 'bg-transparent text-stone-600 border-transparent hover:bg-stone-100 hover:text-stone-900'">
+                    <i data-lucide="compass" class="w-4 h-4"></i>
+                    Sanctuary
+                </button>
+
+                <!-- Tab 2: Meditation Pavilion -->
+                <button @click="activeTab = 'crucible'"
+                        class="px-4 py-2 rounded-xl text-xs sm:text-sm font-title tracking-wider transition flex items-center gap-2 border"
+                        :class="activeTab === 'crucible' ? 'bg-stone-900 text-white border-stone-900 shadow-sm' : 'bg-transparent text-stone-600 border-transparent hover:bg-stone-100 hover:text-stone-900'">
+                    <i data-lucide="hourglass" class="w-4 h-4"></i>
+                    Meditation Pavilion
+                </button>
+
+                <!-- Tab 3: Pavilion of Relics -->
+                <button @click="activeTab = 'reliquary'"
+                        class="px-4 py-2 rounded-xl text-xs sm:text-sm font-title tracking-wider transition flex items-center gap-2 border"
+                        :class="activeTab === 'reliquary' ? 'bg-stone-900 text-white border-stone-900 shadow-sm' : 'bg-transparent text-stone-600 border-transparent hover:bg-stone-100 hover:text-stone-900'">
+                    <i data-lucide="gem" class="w-4 h-4"></i>
+                    Pavilion of Relics
+                </button>
+
+                <!-- Tab 4: Celestial Astrolabe -->
+                <button @click="activeTab = 'oracle'"
+                        class="px-4 py-2 rounded-xl text-xs sm:text-sm font-title tracking-wider transition flex items-center gap-2 border"
+                        :class="activeTab === 'oracle' ? 'bg-stone-900 text-white border-stone-900 shadow-sm' : 'bg-transparent text-stone-600 border-transparent hover:bg-stone-100 hover:text-stone-900'">
+                    <i data-lucide="orbit" class="w-4 h-4"></i>
+                    Celestial Astrolabe
+                </button>
+            </div>
+
+            <!-- Header Action Buttons: Swear Vow / Inscribe Deed -->
+            <div class="flex items-center gap-2 flex-shrink-0">
+                <button @click="showNewCampaignModal = true" class="px-3.5 py-1.5 rounded-lg border border-red-700/30 bg-red-50/70 text-red-900 hover:bg-red-100 text-xs font-serif font-semibold flex items-center gap-1.5 transition">
+                    <i data-lucide="scroll" class="w-3.5 h-3.5 text-red-700"></i>
+                    Swear Cultivation Vow
+                </button>
+                <button @click="showNewQuestModal = true" class="px-3 py-1.5 rounded-lg border border-stone-300 bg-white text-stone-700 hover:border-stone-400 text-xs font-serif font-medium flex items-center gap-1.5 transition shadow-sm">
+                    <i data-lucide="feather" class="w-3.5 h-3.5 text-stone-600"></i>
+                    Inscribe Deed
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================================================================== -->
+    <!-- MAIN WORKSPACE VIEWS                                                 -->
+    <!-- ==================================================================== -->
+    <main class="max-w-7xl mx-auto px-4 py-6">
+
+        <!-- ---------------------------------------------------------------- -->
+        <!-- TAB 1: SANCTUARY (Tribulation Boss, Deeds Matrix & Chronicle)      -->
+        <!-- ---------------------------------------------------------------- -->
+        <div x-show="activeTab === 'command'" class="space-y-6">
+
+            <!-- ACTIVE TRIBULATION / CAMPAIGN BOSS BANNER (RICE PAPER & CINNABAR) -->
+            <template x-if="campaigns.length > 0">
+                <div class="paper-card p-6 rounded-2xl border border-stone-200/90 relative overflow-hidden transition duration-300"
+                     :class="{ 'animate-shake-soft border-red-400 bg-red-50/40': bossHurt }">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-5">
+                        <div class="flex items-start gap-4">
+                            <!-- Ancient Seal Chop -->
+                            <div class="w-13 h-13 p-3 rounded-xl bg-red-50 border border-red-700/30 text-red-800 flex items-center justify-center flex-shrink-0 shadow-sm font-serif font-bold">
+                                <i data-lucide="flame" class="w-7 h-7 text-red-700"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-[11px] uppercase font-title font-bold tracking-widest text-red-700">Active Tribulation</span>
+                                    <span class="text-stone-300">•</span>
+                                    <span class="text-xs text-stone-500 font-serif italic" x-text="campaigns[0].title"></span>
+                                </div>
+                                <h2 class="text-xl sm:text-2xl font-serif font-bold text-stone-900 mt-0.5 tracking-wide" x-text="campaigns[0].boss_name"></h2>
+                                <p class="text-xs text-stone-600 font-serif italic" x-text="campaigns[0].boss_title"></p>
+                            </div>
+                        </div>
+
+                        <!-- Tribulation Vitality Gauge -->
+                        <div class="w-full md:max-w-md">
+                            <div class="flex justify-between items-center text-xs font-serif mb-1.5 text-stone-700">
+                                <span class="font-medium flex items-center gap-1.5 text-red-800">
+                                    <i data-lucide="target" class="w-3.5 h-3.5 text-red-700"></i>
+                                    Tribulation Remnant Vitality
+                                </span>
+                                <span class="font-mono text-stone-600" x-text="campaigns[0].boss_current_hp + ' / ' + campaigns[0].boss_max_hp + ' HP (' + campaigns[0].boss_hp_pct + '%)'"></span>
+                            </div>
+                            <div class="h-3 bg-stone-100 rounded-full overflow-hidden border border-stone-200 p-0.5">
+                                <div class="h-full bg-gradient-to-r from-red-700 to-amber-600 rounded-full transition-all duration-300"
+                                     :style="`width: ${campaigns[0].boss_hp_pct}%`"></div>
+                            </div>
+                            <p class="text-[11px] text-stone-500 mt-1.5 text-right font-serif" x-text="'Target Auspice: ' + (campaigns[0].target_date || 'Ongoing')"></p>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <!-- TWO-COLUMN WORKSPACE: The Grind (Deeds) + The Grimoire (Daoist Chronicle) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+                <!-- LEFT: Phase II - The Grind / Daily Cultivation Deeds (7 Cols) -->
+                <section class="lg:col-span-7 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="font-title font-bold text-base text-stone-900 flex items-center gap-2">
+                                <i data-lucide="book-marked" class="w-4 h-4 text-stone-700"></i>
+                                Phase II: Daily Cultivation Deeds
+                            </h3>
+                            <p class="text-xs text-stone-500 font-serif">Fulfill daily practices to dispel inner friction and harvest Qi & Spirit Stones.</p>
+                        </div>
+                        <span class="text-xs font-mono text-stone-500 bg-stone-100 px-2 py-0.5 rounded border border-stone-200" x-text="quests.filter(q => q.is_completed).length + '/' + quests.length + ' Consecrated'"></span>
+                    </div>
+
+                    <!-- Filter Bar for Deeds -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-stone-200 pb-2">
+                        <!-- Attribute Filters -->
+                        <div class="flex items-center gap-1.5 flex-wrap">
+                            <button @click="questFilterAttr = 'ALL'"
+                                    class="px-2.5 py-1 rounded-md text-[11px] font-serif transition border"
+                                    :class="questFilterAttr === 'ALL' ? 'bg-stone-900 text-white border-stone-900 font-semibold' : 'bg-white text-stone-600 border-stone-200 hover:bg-stone-50'">
+                                All Pillars
+                            </button>
+                            <button @click="questFilterAttr = 'MIND'"
+                                    class="px-2.5 py-1 rounded-md text-[11px] font-serif transition border"
+                                    :class="questFilterAttr === 'MIND' ? 'bg-teal-700 text-white border-teal-700 font-semibold' : 'bg-white text-teal-800 border-stone-200 hover:bg-teal-50'">
+                                Spirit (Mind)
+                            </button>
+                            <button @click="questFilterAttr = 'HEALTH'"
+                                    class="px-2.5 py-1 rounded-md text-[11px] font-serif transition border"
+                                    :class="questFilterAttr === 'HEALTH' ? 'bg-bamboo-700 text-white border-bamboo-700 font-semibold' : 'bg-white text-bamboo-800 border-stone-200 hover:bg-bamboo-50'">
+                                Physique (Health)
+                            </button>
+                            <button @click="questFilterAttr = 'CAREER'"
+                                    class="px-2.5 py-1 rounded-md text-[11px] font-serif transition border"
+                                    :class="questFilterAttr === 'CAREER' ? 'bg-indigo-700 text-white border-indigo-700 font-semibold' : 'bg-white text-indigo-800 border-stone-200 hover:bg-indigo-50'">
+                                Dao (Career)
+                            </button>
+                            <button @click="questFilterAttr = 'WEALTH'"
+                                    class="px-2.5 py-1 rounded-md text-[11px] font-serif transition border"
+                                    :class="questFilterAttr === 'WEALTH' ? 'bg-amber-700 text-white border-amber-700 font-semibold' : 'bg-white text-amber-800 border-stone-200 hover:bg-amber-50'">
+                                Fortune (Wealth)
+                            </button>
+                        </div>
+
+                        <!-- Status Filter -->
+                        <div class="flex items-center gap-1 bg-stone-100 p-0.5 rounded-md border border-stone-200 text-[11px] font-serif">
+                            <button @click="questFilterStatus = 'ALL'"
+                                    class="px-2 py-0.5 rounded transition"
+                                    :class="questFilterStatus === 'ALL' ? 'bg-white text-stone-900 font-bold shadow-xs' : 'text-stone-500 hover:text-stone-800'">
+                                All
+                            </button>
+                            <button @click="questFilterStatus = 'ACTIVE'"
+                                    class="px-2 py-0.5 rounded transition"
+                                    :class="questFilterStatus === 'ACTIVE' ? 'bg-white text-stone-900 font-bold shadow-xs' : 'text-stone-500 hover:text-stone-800'">
+                                Pending
+                            </button>
+                            <button @click="questFilterStatus = 'COMPLETED'"
+                                    class="px-2 py-0.5 rounded transition"
+                                    :class="questFilterStatus === 'COMPLETED' ? 'bg-white text-stone-900 font-bold shadow-xs' : 'text-stone-500 hover:text-stone-800'">
+                                Fulfilled
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Quests Matrix List -->
+                    <div class="space-y-2.5">
+                        <template x-for="q in filteredQuests" :key="q.id">
+                            <div class="paper-card p-4 rounded-xl border transition-all duration-200 flex items-center justify-between gap-4 group hover:border-stone-300"
+                                 :class="{
+                                    'opacity-60 bg-stone-50/70 border-stone-200': q.is_completed,
+                                    'border-stone-200/90': !q.is_completed
+                                 }">
+                                <div class="flex items-start gap-3.5 min-w-0">
+                                    <!-- Complete / Consecrate Check Circle -->
+                                    <button @click="completeQuest(q.id)"
+                                            :disabled="q.is_completed"
+                                            class="w-5 h-5 rounded-full border flex items-center justify-center flex-shrink-0 mt-0.5 transition"
+                                            :class="{
+                                                'bg-jade-700 border-jade-700 text-white': q.is_completed,
+                                                'border-stone-300 hover:border-jade-700 text-transparent hover:text-jade-700 bg-white': !q.is_completed
+                                            }">
+                                        <i data-lucide="check" class="w-3.5 h-3.5 stroke-[2.5]"></i>
+                                    </button>
+
+                                    <!-- Deed Content -->
+                                    <div class="min-w-0">
+                                        <div class="flex items-center gap-1.5 flex-wrap mb-1">
+                                            <!-- Attribute Badge -->
+                                            <span class="text-[10px] font-serif font-bold px-1.5 py-0.2 rounded border"
+                                                  :class="{
+                                                    'text-teal-800 bg-teal-50 border-teal-200': q.attribute_type === 'MIND',
+                                                    'text-bamboo-800 bg-bamboo-50 border-bamboo-200': q.attribute_type === 'HEALTH',
+                                                    'text-indigo-800 bg-indigo-50 border-indigo-200': q.attribute_type === 'CAREER',
+                                                    'text-amber-800 bg-amber-50 border-amber-200': q.attribute_type === 'WEALTH'
+                                                  }"
+                                                  x-text="q.attribute_type">
+                                            </span>
+
+                                            <!-- Difficulty Rank -->
+                                            <span class="text-[10px] font-serif font-medium px-1.5 py-0.2 rounded bg-stone-100 text-stone-700 border border-stone-200" x-text="'Rank ' + q.difficulty_rank"></span>
+
+                                            <template x-if="q.campaign_title">
+                                                <span class="text-[10px] font-serif text-stone-400 truncate max-w-[150px]" x-text="q.campaign_title"></span>
+                                            </template>
+                                        </div>
+
+                                        <p class="text-sm text-stone-800 font-serif leading-snug break-words"
+                                           :class="{ 'line-through text-stone-400': q.is_completed }"
+                                           x-text="q.task_name"></p>
+                                    </div>
+                                </div>
+
+                                <!-- Rewards / Damage Metrics -->
+                                <div class="flex items-center gap-3 flex-shrink-0 text-xs font-serif text-right">
+                                    <div>
+                                        <span class="text-jade-800 font-bold block" x-text="'+' + q.xp_value + ' Qi'"></span>
+                                        <span class="text-stone-500 font-mono text-[10px] block" x-text="'+' + q.gold_value + ' Stones'"></span>
+                                    </div>
+                                    <div class="px-2 py-1 rounded bg-stone-50 border border-stone-200 text-red-700 font-mono text-[11px] font-semibold flex items-center gap-1" title="Purge Tribulation">
+                                        <i data-lucide="sword" class="w-3 h-3 text-red-700"></i>
+                                        <span x-text="q.boss_damage"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+
+                        <div x-show="filteredQuests.length === 0" class="text-center py-10 text-stone-400 paper-card rounded-xl">
+                            <i data-lucide="wind" class="w-8 h-8 mx-auto mb-2 text-stone-300"></i>
+                            <p class="text-xs font-serif">All deeds in this category fulfilled. Quiet mind, clear horizon.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- RIGHT: Phase IV - The Grimoire / Daoist Chronicle (5 Cols) -->
+                <section class="lg:col-span-5 space-y-4">
+                    <div>
+                        <h3 class="font-title font-bold text-base text-stone-900 flex items-center gap-2">
+                            <i data-lucide="pen-tool" class="w-4 h-4 text-stone-700"></i>
+                            Phase IV: The Daoist Chronicle
+                        </h3>
+                        <p class="text-xs text-stone-500 font-serif">Reflect on daily cultivation trials. Receive mentor insight and harvest contemplation Qi.</p>
+                    </div>
+
+                    <!-- Journal Inscription Form -->
+                    <div class="paper-card p-4 rounded-xl border border-stone-200/90 space-y-3 shadow-xs">
+                        <textarea x-model="journalInput"
+                                  rows="4"
+                                  placeholder="Inscribe today's insights, mental resistance, bodily discipline, or breakthroughs in the Dao..."
+                                  class="w-full bg-stone-50/60 border border-stone-200 rounded-lg p-3 text-xs sm:text-sm text-stone-800 placeholder-stone-400 focus:outline-none focus:border-stone-400 font-serif leading-relaxed"></textarea>
+
+                        <div class="flex items-center justify-between pt-1">
+                            <span class="text-xs text-jade-800 font-serif">+50 Contemplation Qi • +20 Spirit Stones</span>
+                            <button @click="submitJournal()"
+                                    :disabled="submittingJournal || !journalInput.trim()"
+                                    class="px-4 py-2 rounded-lg bg-stone-900 hover:bg-stone-800 text-white font-serif font-medium text-xs tracking-wider transition disabled:opacity-40 flex items-center gap-1.5 shadow-xs">
+                                <i data-lucide="feather" class="w-3.5 h-3.5" x-show="!submittingJournal"></i>
+                                <span x-text="submittingJournal ? 'Communing...' : 'Seal in Chronicle'"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Latest AI Game Master Note (if any) -->
+                    <template x-if="latestLogAnalysis">
+                        <div class="paper-card p-4 rounded-xl border border-jade-600/30 bg-jade-50/50 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-serif font-bold text-jade-900 flex items-center gap-1.5">
+                                    <i data-lucide="sparkle" class="w-3.5 h-3.5 text-jade-700"></i>
+                                    Mentor's Contemplation
+                                </span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded border"
+                                      :class="latestLogAnalysis.sentiment_score >= 0 ? 'bg-white text-jade-800 border-jade-300' : 'bg-white text-cinnabar-800 border-cinnabar-300'"
+                                      x-text="'Harmony: ' + latestLogAnalysis.sentiment_score"></span>
+                            </div>
+                            <p class="text-xs italic text-stone-800 font-serif leading-relaxed" x-text="'“' + latestLogAnalysis.ai_gamemaster_notes + '”'"></p>
+                            <div class="pt-1 flex items-center justify-between text-[11px] font-serif text-stone-500">
+                                <span x-text="latestLogAnalysis.auto_tags"></span>
+                                <span x-text="'Friction: ' + (latestLogAnalysis.detected_blockers || 'None')"></span>
+                            </div>
+                        </div>
+                    </template>
+
+                    <!-- Historical Chronicles Snippets -->
+                    <div class="space-y-2">
+                        <h4 class="text-xs font-serif font-bold text-stone-500 uppercase tracking-wider">Past Chronicle Inscriptions</h4>
+                        <div class="space-y-2 max-h-[280px] overflow-y-auto pr-1">
+                            <template x-for="log in recentLogs" :key="log.id">
+                                <div class="paper-card p-3 rounded-lg border border-stone-200 text-xs space-y-1.5 hover:border-stone-300 transition">
+                                    <div class="flex items-center justify-between text-[11px] font-mono text-stone-500">
+                                        <span x-text="log.created_at"></span>
+                                        <span class="font-serif font-medium"
+                                              :class="log.sentiment_score >= 0 ? 'text-jade-700' : 'text-cinnabar-700'"
+                                              x-text="'Score: ' + log.sentiment_score"></span>
+                                    </div>
+                                    <p class="text-stone-700 font-serif leading-relaxed line-clamp-2" x-text="log.journal_content"></p>
+                                    <p class="text-[11px] text-stone-500 italic font-serif" x-text="'“' + log.ai_gamemaster_notes + '”'"></p>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- ---------------------------------------------------------------- -->
+        <!-- TAB 2: MEDITATION PAVILION (The Crucible Focus Chamber)           -->
+        <!-- ---------------------------------------------------------------- -->
+        <div x-show="activeTab === 'crucible'" class="space-y-6">
+            <div class="max-w-2xl mx-auto paper-card p-8 sm:p-10 rounded-3xl border border-stone-200 text-center space-y-6 shadow-sm relative overflow-hidden">
+                <div>
+                    <span class="text-xs font-serif font-bold uppercase tracking-widest text-jade-700">Phase III</span>
+                    <h2 class="text-2xl sm:text-3xl font-serif font-bold text-stone-900 mt-1">The Meditation Pavilion</h2>
+                    <p class="text-xs sm:text-sm text-stone-600 mt-1.5 max-w-md mx-auto font-serif leading-relaxed">
+                        Anchor the restless mind in unbroken tranquility. Completing a secluded session purges mental haze, harvests Qi, and directs strike force against the active Tribulation.
+                    </p>
+                </div>
+
+                <!-- Seclusion Duration Selectors -->
+                <div class="flex items-center justify-center gap-3">
+                    <button @click="setCrucibleDuration(25)"
+                            :disabled="crucible.isRunning"
+                            class="px-4 py-2 rounded-xl text-xs font-serif border transition"
+                            :class="crucible.durationMinutes === 25 ? 'bg-stone-900 text-white border-stone-900 font-semibold' : 'border-stone-200 bg-white text-stone-700 hover:border-stone-300'">
+                        25m Incense Stick
+                    </button>
+                    <button @click="setCrucibleDuration(50)"
+                            :disabled="crucible.isRunning"
+                            class="px-4 py-2 rounded-xl text-xs font-serif border transition"
+                            :class="crucible.durationMinutes === 50 ? 'bg-stone-900 text-white border-stone-900 font-semibold' : 'border-stone-200 bg-white text-stone-700 hover:border-stone-300'">
+                        50m Deep Seclusion
+                    </button>
+                    <button @click="setCrucibleDuration(90)"
+                            :disabled="crucible.isRunning"
+                            class="px-4 py-2 rounded-xl text-xs font-serif border transition"
+                            :class="crucible.durationMinutes === 90 ? 'bg-stone-900 text-white border-stone-900 font-semibold' : 'border-stone-200 bg-white text-stone-700 hover:border-stone-300'">
+                        90m Solitary Peak
+                    </button>
+                </div>
+
+                <!-- Channeling Configuration -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left font-serif">
+                    <div>
+                        <label class="text-[11px] text-stone-500 mb-1 block">Nourish Pillar:</label>
+                        <select x-model="crucible.attributeType" :disabled="crucible.isRunning" class="w-full bg-stone-50 border border-stone-200 rounded-lg p-2 text-xs text-stone-800">
+                            <option value="MIND">SPIRIT (Mind & Clarity)</option>
+                            <option value="CAREER">DAO (Career & Manifestation)</option>
+                            <option value="HEALTH">PHYSIQUE (Health & Vitality)</option>
+                            <option value="WEALTH">FORTUNE (Wealth & Compounding)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="text-[11px] text-stone-500 mb-1 block">Purge Tribulation:</label>
+                        <select x-model="crucible.campaignId" :disabled="crucible.isRunning" class="w-full bg-stone-50 border border-stone-200 rounded-lg p-2 text-xs text-stone-800">
+                            <template x-for="c in campaigns" :key="c.id">
+                                <option :value="c.id" x-text="c.boss_name + ' (' + c.boss_current_hp + ' HP)'"></option>
+                            </template>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Zen Meditation Breathing Circle -->
+                <div class="relative py-6">
+                    <div class="w-52 h-52 mx-auto rounded-full border-2 flex flex-col items-center justify-center relative transition-all duration-700 shadow-sm"
+                         :class="{
+                            'border-jade-600 animate-breathe bg-jade-50/30': crucible.isRunning,
+                            'border-stone-200 bg-stone-50/60': !crucible.isRunning
+                         }">
+                        <span class="text-4xl sm:text-5xl font-mono font-bold tracking-tight text-stone-800" x-text="formatCrucibleTime()"></span>
+                        <span class="text-xs font-serif text-jade-800 mt-1 uppercase tracking-widest" x-text="crucible.isRunning ? 'Harmonizing Qi' : 'Stillness'"></span>
+                    </div>
+                </div>
+
+                <!-- Meditation Controls -->
+                <div class="flex items-center justify-center gap-4">
+                    <button @click="startCrucible()" x-show="!crucible.isRunning" class="px-7 py-2.5 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-serif font-semibold text-xs tracking-wider transition shadow-sm flex items-center gap-2">
+                        <i data-lucide="play" class="w-3.5 h-3.5 fill-white"></i>
+                        Enter Secluded Focus
+                    </button>
+                    <button @click="pauseCrucible()" x-show="crucible.isRunning" class="px-7 py-2.5 rounded-xl bg-stone-200 hover:bg-stone-300 text-stone-800 font-serif font-semibold text-xs transition flex items-center gap-2">
+                        <i data-lucide="pause" class="w-3.5 h-3.5"></i>
+                        Halt Breathing
+                    </button>
+                    <button @click="resetCrucible()" class="px-4 py-2.5 rounded-xl border border-stone-200 text-stone-500 hover:text-stone-800 transition font-serif text-xs">
+                        Reset
+                    </button>
+                </div>
+
+                <div class="text-xs font-serif text-stone-500 pt-1">
+                    Harvest Preview: <span class="text-jade-800 font-bold" x-text="'+' + (crucible.durationMinutes * 3.2).toFixed(0) + ' Qi'"></span> • 
+                    <span class="text-amber-800 font-bold" x-text="'+' + (crucible.durationMinutes * 1.4).toFixed(0) + ' Spirit Stones'"></span> • 
+                    <span class="text-red-700 font-bold" x-text="'+' + (crucible.durationMinutes * 3.6).toFixed(0) + ' Tribulation Purged'"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ---------------------------------------------------------------- -->
+        <!-- TAB 3: PAVILION OF RELICS (The Reliquary Marketplace)            -->
+        <!-- ---------------------------------------------------------------- -->
+        <div x-show="activeTab === 'reliquary'" class="space-y-6">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-stone-200 pb-4">
+                <div>
+                    <span class="text-xs font-serif font-bold uppercase tracking-widest text-jade-700">Phase VI</span>
+                    <h2 class="text-2xl font-serif font-bold text-stone-900 mt-0.5">Pavilion of Relics & Merit</h2>
+                    <p class="text-xs text-stone-500 font-serif">Exchange earned Spirit Stones for preservation talismans or custom mortal realm rewards.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="px-4 py-2 rounded-xl paper-card border border-stone-200 text-stone-900 font-serif font-bold text-xs flex items-center gap-2 shadow-xs">
+                        <i data-lucide="circle-dot" class="w-3.5 h-3.5 text-amber-700"></i>
+                        <span x-text="(user.aether_gold || 0).toLocaleString() + ' Spirit Stones'"></span>
+                    </div>
+                    <button @click="showNewRewardModal = true" class="px-3.5 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-serif font-medium text-xs flex items-center gap-1.5 transition shadow-xs">
+                        <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                        Inscribe Relic
+                    </button>
+                </div>
+            </div>
+
+            <!-- Relics Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <template x-for="item in reliquaryItems" :key="item.id">
+                    <div class="paper-card p-5 rounded-2xl border transition-all duration-200 flex flex-col justify-between hover:border-stone-300"
+                         :class="{
+                            'border-teal-200 bg-teal-50/30': item.item_type === 'SYSTEM_ARTIFACT',
+                            'border-stone-200/90': item.item_type !== 'SYSTEM_ARTIFACT'
+                         }">
+                        <div>
+                            <div class="flex items-start justify-between gap-2 mb-2.5">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-serif font-semibold border"
+                                      :class="{
+                                        'bg-teal-50 text-teal-800 border-teal-200': item.item_type === 'SYSTEM_ARTIFACT',
+                                        'bg-stone-100 text-stone-600 border-stone-200': item.item_type !== 'SYSTEM_ARTIFACT'
+                                      }"
+                                      x-text="item.item_type === 'SYSTEM_ARTIFACT' ? 'PRESERVATION TALISMAN' : 'MORTAL REALM REWARD'"></span>
+
+                                <span class="text-xs font-serif text-stone-400" x-text="'Claimed ' + item.times_purchased + 'x'"></span>
+                            </div>
+
+                            <h4 class="font-serif font-bold text-base text-stone-900" x-text="item.item_name"></h4>
+                            <p class="text-xs text-stone-600 mt-2 font-serif leading-relaxed" x-text="item.item_description"></p>
+                        </div>
+
+                        <div class="pt-4 mt-4 border-t border-stone-100 flex items-center justify-between">
+                            <span class="font-serif font-bold text-amber-800 text-xs flex items-center gap-1">
+                                <i data-lucide="circle-dot" class="w-3 h-3 text-amber-700"></i>
+                                <span x-text="item.gold_cost + ' Stones'"></span>
+                            </span>
+
+                            <button @click="buyItem(item)"
+                                    :disabled="user.aether_gold < item.gold_cost"
+                                    class="px-3.5 py-1.5 rounded-lg text-xs font-serif font-medium transition flex items-center gap-1.5"
+                                    :class="{
+                                        'bg-stone-900 hover:bg-stone-800 text-white': user.aether_gold >= item.gold_cost,
+                                        'bg-stone-100 text-stone-400 cursor-not-allowed': user.aether_gold < item.gold_cost
+                                    }">
+                                <i data-lucide="sparkles" class="w-3 h-3"></i>
+                                Acquire
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- ---------------------------------------------------------------- -->
+        <!-- TAB 4: CELESTIAL ASTROLABE (The Oracle Telemetry & Prophecy)     -->
+        <!-- ---------------------------------------------------------------- -->
+        <div x-show="activeTab === 'oracle'" class="space-y-6">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-stone-200 pb-4">
+                <div>
+                    <span class="text-xs font-serif font-bold uppercase tracking-widest text-jade-700">Phase VII</span>
+                    <h2 class="text-2xl font-serif font-bold text-stone-900 mt-0.5">The Celestial Astrolabe</h2>
+                    <p class="text-xs text-stone-500 font-serif">Harmonic telemetry across the 4 pillars, 14-day velocity curves, and grand divination.</p>
+                </div>
+                <button @click="invokeProphecy()"
+                        :disabled="prophecyLoading"
+                        class="px-4 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-serif font-medium text-xs tracking-wider transition shadow-sm flex items-center gap-2">
+                    <i data-lucide="compass" class="w-4 h-4 animate-spin" x-show="prophecyLoading"></i>
+                    <i data-lucide="orbit" class="w-4 h-4" x-show="!prophecyLoading"></i>
+                    <span x-text="prophecyLoading ? 'Consulting the Cosmic Weave...' : 'Consult Celestial Astrolabe'"></span>
+                </button>
+            </div>
+
+            <!-- Inscribed Prophecy Banner -->
+            <template x-if="currentProphecy">
+                <div class="paper-card p-6 rounded-2xl border border-jade-600/30 bg-jade-50/30 space-y-3 shadow-sm">
+                    <div class="flex items-center justify-between flex-wrap gap-2">
+                        <h3 class="font-serif font-bold text-base text-stone-900" x-text="currentProphecy.prophecy_title"></h3>
+                        <span class="px-2.5 py-0.5 rounded text-[11px] font-serif font-bold border"
+                              :class="{
+                                'bg-jade-50 text-jade-800 border-jade-300': currentProphecy.burnout_risk_level === 'LOW',
+                                'bg-amber-50 text-amber-800 border-amber-300': currentProphecy.burnout_risk_level === 'MODERATE',
+                                'bg-red-50 text-red-800 border-red-300': currentProphecy.burnout_risk_level === 'HIGH'
+                              }"
+                              x-text="'Distraction Risk: ' + currentProphecy.burnout_risk_level"></span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-stone-800 leading-relaxed font-serif italic" x-text="'“' + currentProphecy.narrative_assessment + '”'"></p>
+                    <div class="p-3 rounded-lg bg-white border border-stone-200 text-xs font-serif leading-relaxed">
+                        <strong class="text-jade-800">Weakest Pillar Remedy: </strong>
+                        <span class="text-stone-700" x-text="currentProphecy.weakest_pillar_advice"></span>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Dual Charts Row -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- 4 Pillars Radar Chart (5 Cols) -->
+                <div class="lg:col-span-5 paper-card p-5 rounded-2xl border border-stone-200 space-y-3">
+                    <h4 class="font-title font-bold text-xs text-stone-800 flex items-center gap-2">
+                        <i data-lucide="triangle" class="w-3.5 h-3.5 text-jade-700"></i>
+                        4-Pillar Harmonic Radar
+                    </h4>
+                    <div class="h-64 relative">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 14-Day Velocity & Sentiment Dual Axis (7 Cols) -->
+                <div class="lg:col-span-7 paper-card p-5 rounded-2xl border border-stone-200 space-y-3">
+                    <h4 class="font-title font-bold text-xs text-stone-800 flex items-center gap-2">
+                        <i data-lucide="activity" class="w-3.5 h-3.5 text-stone-700"></i>
+                        14-Day Qi & Mind State Velocity
+                    </h4>
+                    <div class="h-64 relative">
+                        <canvas id="velocityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Friction Blockers Tag Cloud -->
+            <div class="paper-card p-5 rounded-2xl border border-stone-200 space-y-3">
+                <h4 class="font-title font-bold text-xs text-stone-800 flex items-center gap-2">
+                    <i data-lucide="shield-alert" class="w-3.5 h-3.5 text-stone-600"></i>
+                    Friction & Distraction Frequencies
+                </h4>
+                <div class="flex flex-wrap gap-2">
+                    <template x-for="b in (oracleData.top_blockers || [])" :key="b.tag">
+                        <span class="px-2.5 py-1 rounded-md text-xs font-serif bg-stone-100 border border-stone-200 text-stone-700 flex items-center gap-1.5">
+                            <i data-lucide="alert-circle" class="w-3 h-3 text-stone-400"></i>
+                            <span x-text="b.tag"></span>
+                            <span class="text-[10px] bg-stone-200 px-1 rounded text-stone-600 font-mono" x-text="b.count"></span>
+                        </span>
+                    </template>
+                    <div x-show="!oracleData.top_blockers || oracleData.top_blockers.length === 0" class="text-xs text-stone-500 font-serif">
+                        No recurring inner friction detected. Pure stillness.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ==================================================================== -->
+    <!-- MODALS (CLEAN LIGHT WUXIA DIALOGS)                                   -->
+    <!-- ==================================================================== -->
+
+    <!-- MODAL 1: SWEAR CULTIVATION VOW -->
+    <div x-show="showNewCampaignModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/40 backdrop-blur-xs">
+        <div @click.away="showNewCampaignModal = false" class="paper-card max-w-lg w-full p-6 rounded-2xl border border-stone-200 space-y-4 shadow-xl">
+            <div class="flex items-center justify-between border-b border-stone-100 pb-3">
+                <h3 class="font-title font-bold text-base text-stone-900 flex items-center gap-2">
+                    <i data-lucide="scroll" class="w-4 h-4 text-red-700"></i>
+                    Phase I: Swear Cultivation Vow
+                </h3>
+                <button @click="showNewCampaignModal = false" class="text-stone-400 hover:text-stone-700">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <p class="text-xs text-stone-600 font-serif leading-relaxed">
+                Declare your high-level vow. The Mentor will reveal a corresponding Tribulation Beast and splinter the vow into daily deeds.
+            </p>
+
+            <div class="space-y-3 font-serif">
+                <div>
+                    <label class="text-xs text-stone-600 mb-1 block">Macro Cultivation Vow:</label>
+                    <input type="text" x-model="newCampaign.goal_title" placeholder="e.g. Master Distributed Systems Architecture" class="w-full bg-stone-50 border border-stone-200 rounded-lg p-2.5 text-xs text-stone-800 focus:outline-none focus:border-stone-400">
+                </div>
+
+                <div>
+                    <label class="text-xs text-stone-600 mb-1 block">Context & Stakes:</label>
+                    <textarea x-model="newCampaign.description" rows="2" placeholder="Details, milestones, or friction areas to overcome..." class="w-full bg-stone-50 border border-stone-200 rounded-lg p-2.5 text-xs text-stone-800 focus:outline-none focus:border-stone-400"></textarea>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-xs text-stone-600 mb-1 block">Domain Pillar:</label>
+                        <select x-model="newCampaign.difficulty_focus" class="w-full bg-stone-50 border border-stone-200 rounded-lg p-2.5 text-xs text-stone-800">
+                            <option value="BALANCED">BALANCED</option>
+                            <option value="MIND">SPIRIT (Mind)</option>
+                            <option value="HEALTH">PHYSIQUE (Health)</option>
+                            <option value="CAREER">DAO (Career)</option>
+                            <option value="WEALTH">FORTUNE (Wealth)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="text-xs text-stone-600 mb-1 block">Target Date:</label>
+                        <input type="date" x-model="newCampaign.target_date" class="w-full bg-stone-50 border border-stone-200 rounded-lg p-2.5 text-xs text-stone-800 font-mono">
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-2 pt-2 border-t border-stone-100">
+                <button @click="showNewCampaignModal = false" class="px-4 py-2 text-xs font-serif text-stone-500 hover:text-stone-800">Cancel</button>
+                <button @click="submitCampaign()" :disabled="creatingCampaign || !newCampaign.goal_title.trim()" class="px-5 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-serif font-medium text-xs tracking-wider transition disabled:opacity-40">
+                    <span x-text="creatingCampaign ? 'Manifesting Tribulation...' : 'Inscribe Vow'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: INSCRIBE DAILY DEED -->
+    <div x-show="showNewQuestModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/40 backdrop-blur-xs">
+        <div @click.away="showNewQuestModal = false" class="paper-card max-w-md w-full p-6 rounded-2xl border border-stone-200 space-y-4 shadow-xl">
+            <div class="flex items-center justify-between border-b border-stone-100 pb-3">
+                <h3 class="font-title font-bold text-base text-stone-900 flex items-center gap-2">
+                    <i data-lucide="feather" class="w-4 h-4 text-stone-700"></i>
+                    Inscribe Cultivation Deed
+                </h3>
+                <button @click="showNewQuestModal = false" class="text-stone-400 hover:text-stone-700">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <div class="space-y-3 font-serif">
+                <div>
+                    <label class="text-xs text-stone-600 mb-1 block">Deed Name:</label>
+                    <input type="text" x-model="newQuest.task_name" placeholder="e.g. Read 2 chapters of System Design" class="w-full bg-stone-50 border border-stone-200 rounded-lg p-2.5 text-xs text-stone-800 focus:outline-none focus:border-stone-400">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-xs text-stone-600 mb-1 block">Pillar:</label>
+                        <select x-model="newQuest.attribute_type" class="w-full bg-stone-50 border border-stone-200 rounded-lg p-2.5 text-xs text-stone-800">
+                            <option value="MIND">SPIRIT (Mind)</option>
+                            <option value="HEALTH">PHYSIQUE (Health)</option>
+                            <option value="CAREER">DAO (Career)</option>
+                            <option value="WEALTH">FORTUNE (Wealth)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="text-xs text-stone-600 mb-1 block">Difficulty Rank:</label>
+                        <select x-model="newQuest.difficulty_rank" class="w-full bg-stone-50 border border-stone-200 rounded-lg p-2.5 text-xs text-stone-800">
+                            <option value="E">Rank E (25 Qi)</option>
+                            <option value="D">Rank D (40 Qi)</option>
+                            <option value="C" selected>Rank C (65 Qi)</option>
+                            <option value="B">Rank B (100 Qi)</option>
+                            <option value="A">Rank A (150 Qi)</option>
+                            <option value="S">Rank S (250 Qi)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-xs text-stone-600 mb-1 block">Link to Tribulation (Optional):</label>
+                    <select x-model="newQuest.campaign_id" class="w-full bg-stone-50 border border-stone-200 rounded-lg p-2.5 text-xs text-stone-800">
+                        <option :value="null">None (Standalone)</option>
+                        <template x-for="c in campaigns" :key="c.id">
+                            <option :value="c.id" x-text="c.title"></option>
+                        </template>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-2 pt-2 border-t border-stone-100">
+                <button @click="showNewQuestModal = false" class="px-4 py-2 text-xs font-serif text-stone-500 hover:text-stone-800">Cancel</button>
+                <button @click="submitCustomQuest()" :disabled="creatingQuest || !newQuest.task_name.trim()" class="px-5 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-serif font-medium text-xs tracking-wider transition disabled:opacity-40">
+                    <span x-text="creatingQuest ? 'Inscribing...' : 'Add Deed'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: INSCRIBE CUSTOM RELIC -->
+    <div x-show="showNewRewardModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/40 backdrop-blur-xs">
+        <div @click.away="showNewRewardModal = false" class="paper-card max-w-md w-full p-6 rounded-2xl border border-stone-200 space-y-4 shadow-xl">
+            <div class="flex items-center justify-between border-b border-stone-100 pb-3">
+                <h3 class="font-title font-bold text-base text-stone-900 flex items-center gap-2">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-amber-700"></i>
+                    Inscribe Custom Relic
+                </h3>
+                <button @click="showNewRewardModal = false" class="text-stone-400 hover:text-stone-700">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <div class="space-y-3 font-serif">
+                <div>
+                    <label class="text-xs text-stone-600 mb-1 block">Relic Name:</label>
+                    <input type="text" x-model="newReward.item_name" placeholder="e.g. Rare Mountain Spring Oolong Tea" class="w-full bg-stone-50 border border-stone-200 rounded-lg p-2.5 text-xs text-stone-800 focus:outline-none focus:border-stone-400">
+                </div>
+
+                <div>
+                    <label class="text-xs text-stone-600 mb-1 block">Description:</label>
+                    <textarea x-model="newReward.item_description" rows="2" placeholder="e.g. Mindful tea ceremony after completing 3 daily deeds" class="w-full bg-stone-50 border border-stone-200 rounded-lg p-2.5 text-xs text-stone-800 focus:outline-none focus:border-stone-400"></textarea>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-xs text-stone-600 mb-1 block">Spirit Stones Cost:</label>
+                        <input type="number" x-model.number="newReward.gold_cost" min="1" class="w-full bg-stone-50 border border-stone-200 rounded-lg p-2.5 text-xs text-stone-800 font-mono">
+                    </div>
+
+                    <div>
+                        <label class="text-xs text-stone-600 mb-1 block">Type:</label>
+                        <select x-model="newReward.item_type" class="w-full bg-stone-50 border border-stone-200 rounded-lg p-2.5 text-xs text-stone-800">
+                            <option value="IRL_REWARD">Mortal Realm Reward</option>
+                            <option value="SYSTEM_ARTIFACT">Preservation Talisman</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-2 pt-2 border-t border-stone-100">
+                <button @click="showNewRewardModal = false" class="px-4 py-2 text-xs font-serif text-stone-500 hover:text-stone-800">Cancel</button>
+                <button @click="submitCustomReward()" :disabled="creatingReward || !newReward.item_name.trim()" class="px-5 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-serif font-medium text-xs tracking-wider transition disabled:opacity-40">
+                    <span x-text="creatingReward ? 'Forging...' : 'Forge Relic'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
