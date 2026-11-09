@@ -1,80 +1,72 @@
-# The Seven-Phase Ascension — AI-Powered Life RPG
+# The Seven-Phase Ascension (Life RPG)
 
-> A production-grade, AI-powered Life RPG and gamified productivity web application built with a serene, light Wuxia / Daoist Cultivation aesthetic.
-
-![Python Version](https://img.shields.io/badge/python-3.11%2B-blue.svg)
-![Flask 3.x](https://img.shields.io/badge/flask-3.x-green.svg)
-![SQLite WAL](https://img.shields.io/badge/sqlite-WAL%20mode-orange.svg)
-![License](https://img.shields.io/badge/license-MIT-purple.svg)
+> **A Production-Grade, AI-Powered Life RPG & Gamified Productivity Platform**  
+> *Cultivation Edition: Calm Light Wuxia Aesthetics, Non-Linear RPG Mathematics, and AI Telemetry.*
 
 ---
 
-## The Seven Phases of Ascension
+## 🌟 Overview
 
-1. **Phase I — The Vow**: Swear a macro goal and target date. The AI Game Master splinters the vow into 5–6 actionable daily deeds across 4 pillars (*Spirit/Mind, Physique/Health, Dao/Career, Fortune/Wealth*) and manifests a thematic Tribulation Boss.
-2. **Phase II — The Grind**: Daily quest matrix with difficulty ranks (`E` to `S`), attribute tags, streak multipliers, and instant damage channeling to the active Tribulation.
-3. **Phase III — The Crucible**: Meditation focus chamber with customizable Pomodoro intervals (25m, 50m, 90m) and ambient Zen breathing guidance.
-4. **Phase IV — The Grimoire**: Daily Daoist chronicle and reflection journal with automated sentiment scoring, friction blocker detection, and AI Game Master wisdom notes.
-5. **Phase V — The Ascension**: Non-linear leveling formulas, 7 Ascension Realm Tiers (Dormant Initiate to Transcendent Ascendant), and dynamic class archetypes (e.g. *Astral Savant*, *Grand Architect*, *Psionic Juggernaut*).
-6. **Phase VI — The Reliquary**: Aether Gold / Spirit Stones marketplace for custom IRL rewards and *Chronos Aegis* streak preservation shields.
-7. **Phase VII — The Oracle**: Telemetry dashboard featuring a 4-Pillar Harmonic Radar Chart, 14-Day Velocity & Mind Harmony Dual-Axis Line Chart, Blocker Frequency tags, and one-click weekly prophecy divination.
+**The Seven-Phase Ascension** transforms real-world goals, deep-work focus sessions, and habit tracking into a unified Daoist cultivation journey. Declare macro vows, splinter them into actionable deeds, enter secluded focus chambers, and dispel inner tribulation beasts across four core pillars: **Spirit (Mind)**, **Physique (Health)**, **Dao (Career)**, and **Fortune (Wealth)**.
 
 ---
 
-## System Architecture
+## ⛩️ The Seven Phases of Ascension
 
-- **Backend**: Python 3.11+, Flask 3.x (Modular Blueprints & Application Factory), SQLite3 (WAL mode + Foreign Keys), Pydantic schemas.
-- **AI Engine**: Google GenAI SDK (`gemini-2.5-flash`) paired with a deterministic offline heuristic generator that runs 100% offline without API keys.
-- **Frontend**: HTML5, Tailwind CSS, Alpine.js, Chart.js, Canvas-Confetti, Lucide Icons.
-- **Audio**: Web Audio API procedural sound synthesizer (resonant singing bowl chimes, temple wooden fish, pure jade pings, and bronze gong fanfares).
+1. **Phase I — The Vow**: Swear a macro goal and target date. The AI Game Master splinters the vow into 5–6 daily deeds and spawns a thematic **Tribulation Beast** with calculated HP.
+2. **Phase II — The Grind (Daily Deeds)**: Practice deeds with difficulty ranks ($E$ to $S$), streak multipliers, and instant Tribulation strikes that award Qi & Spirit Stones.
+3. **Phase III — The Crucible (Meditation Pavilion)**: Customizable Pomodoro timer (25m / 50m / 90m) with gentle breathing circle animation, delivering critical strikes to the active Tribulation.
+4. **Phase IV — The Grimoire (Daoist Chronicle)**: Contemplation journal analyzed for sentiment score ($-100$ to $+100$), auto-tags, and habit blockers with personalized mentor reflections.
+5. **Phase V — The Ascension**: Dynamic leveling math ($\lfloor 100 \times (L - 1)^{1.5} \rfloor$) and 7 Realm Tiers with dynamic Archetypes (*Astral Savant*, *Titan Vanguard*, *Grand Architect*, *Sovereign Alchemist*, and hybrid titles).
+6. **Phase VI — The Reliquary (Pavilion of Relics)**: Spend Spirit Stones on custom mortal rewards or **Chronos Preservation Talismans** (Streak Freeze Shields).
+7. **Phase VII — The Oracle (Celestial Astrolabe)**: 4-Pillar Harmonic Radar, 14-day Qi & Mind-State velocity charts, blocker tag frequency cloud, and strategic weekly AI decrees.
 
 ---
 
-## Quickstart
+## 🛠️ Tech Stack
 
-### 1. Clone & Setup
+- **Backend**: Python 3.11+, Flask 3.x (Modular Blueprints & Application Factory), SQLite3 (WAL mode, Foreign Keys enforced), Pydantic.
+- **AI Engine**: Google GenAI SDK (`gemini-2.5-flash`) via `.env` (`GEMINI_API_KEY`) + 100% deterministic offline fallback.
+- **Frontend**: HTML5, Jinja2, Tailwind CSS, Alpine.js, Chart.js, Canvas-Confetti, Lucide Icons.
+- **Audio**: Web Audio API procedural acoustics (Tibetan singing bowls, wooden fish *muyu*, jade chimes, bronze temple gong).
+
+---
+
+## 🚀 Quickstart
+
+### 1. Install Dependencies
 ```bash
-git clone https://github.com/madhurjyak/LifeRPG.git
-cd LifeRPG
-python -m venv venv
-# On Windows:
-venv\Scripts\activate
-# On Unix:
-source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 2. Configure Environment
+### 2. Environment Configuration (Optional)
 Copy `.env.example` to `.env`:
 ```bash
 cp .env.example .env
 ```
-*(Optional)* Add your Gemini API key to `.env`:
-```env
-GEMINI_API_KEY=your_key_here
-```
+*(Optional: Add your `GEMINI_API_KEY` for live LLM generation; works 100% offline via deterministic heuristics without an API key).*
 
-### 3. Launch the Application
+### 3. Run the Application
 ```bash
 python run.py
 ```
-Open **http://127.0.0.1:5000** in your browser.
+Open **[http://127.0.0.1:5000](http://127.0.0.1:5000)** in your browser.
 
 ---
 
-## Running Verification & Simulation
+## 🧪 Testing & Verification
 
-Run the automated endpoint test suite:
+Run the automated endpoint and database test suite:
 ```bash
 pytest tests/test_api.py -v
 ```
 
-Execute the 100-Day agentic progression simulation:
+Execute the 100-day progression simulation:
 ```bash
 python tests/simulate_100_days.py
 ```
 
 ---
 
-## License
-MIT License.
+## 📜 License
+MIT

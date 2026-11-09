@@ -1,10 +1,13 @@
-# Python
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+
+# C extensions
 *.so
+
+# Distribution / packaging
 .Python
-env/
 build/
 develop-eggs/
 dist/
@@ -17,31 +20,39 @@ parts/
 sdist/
 var/
 wheels/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
 
-# Virtual Environments
+# Virtual environments
+.env
+.venv
+env/
 venv/
-.venv/
 ENV/
+env.bak/
+venv.bak/
 
-# Testing & Cache
+# Database files
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+
+# Pytest / coverage
 .pytest_cache/
 .coverage
 htmlcov/
 
-# Environment & Secrets
-.env
-
-# SQLite Database Files
-*.db
-*.db-wal
-*.db-shm
-*.sqlite3
-
-# IDE & OS
+# IDE / Editor artifacts
 .vscode/
 .idea/
-.DS_Store
+*.swp
+*.swo
+
+# OS artifacts
 Thumbs.db
+Desktop.ini
+.DS_Store
