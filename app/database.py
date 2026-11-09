@@ -3,7 +3,14 @@ import os
 from datetime import datetime, timedelta
 from flask import g, current_app
 
-DEFAULT_DB_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "seven_ascension.db")
+def get_default_db_path():
+    # In Vercel serverless functions, the root filesystem is read-only.
+    # Writable storage is mounted at /tmp.
+    if os.getenv("VERCEL"):
+        return "/tmp/seven_ascension.db"
+    return os.path.join(os.path.dirname(os.path.dirname(__file__)), "seven_ascension.db")
+
+DEFAULT_DB_PATH = get_default_db_path()
 
 def get_db_path():
     if current_app:
@@ -26,7 +33,10 @@ def get_db(custom_path=None):
 
 def _configure_sqlite(conn):
     cursor = conn.cursor()
-    cursor.execute("PRAGMA journal_mode=WAL;")
+    try:
+        cursor.execute("PRAGMA journal_mode=WAL;")
+    except sqlite3.OperationalError:
+        pass
     cursor.execute("PRAGMA synchronous=NORMAL;")
     cursor.execute("PRAGMA foreign_keys=ON;")
     cursor.execute("PRAGMA busy_timeout=10000;")

@@ -68,6 +68,37 @@ python tests/simulate_100_days.py
 
 ---
 
+## ☁️ Deploying to Vercel
+
+This repository is pre-configured for instant deployment on [Vercel](https://vercel.com) using Python Serverless Functions.
+
+### Option A: One-Click GitHub Integration (Recommended)
+1. Push your repository to GitHub:
+   ```bash
+   git push origin main
+   ```
+2. Go to [vercel.com/new](https://vercel.com/new).
+3. Import your **LifeRPG** repository.
+4. (Optional) In **Environment Variables**, add:
+   - `GEMINI_API_KEY`: *(Optional)* Your Google Gemini API Key.
+   - `SECRET_KEY`: *(Optional)* A random secret string.
+5. Click **Deploy**. Vercel will install dependencies, wire the serverless WSGI gateway, and launch your live sanctuary!
+
+### Option B: Deploy via Vercel CLI
+If you have the Vercel CLI installed:
+```bash
+vercel
+```
+For production:
+```bash
+vercel --prod
+```
+
+> [!NOTE]
+> On Vercel's serverless infrastructure, the database runs in ephemeral storage (`/tmp/seven_ascension.db`) and automatically seeds all starting characters, quests, and campaigns. For permanent persistent database storage across serverless cold starts, you can connect an external cloud database (such as Turso, Supabase, or Neon) by providing the `DATABASE_PATH` or connection URL in your Vercel project environment variables.
+
+---
+
 ## 📜 License
 MIT
 
