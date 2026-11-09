@@ -27,6 +27,8 @@ def get_current_user_id():
     return new_user['id']
 
 @main_bp.route('/')
+@main_bp.route('/api')
+@main_bp.route('/api/')
 def dashboard():
     return render_template('dashboard.html')
 
